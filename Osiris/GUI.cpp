@@ -1298,6 +1298,7 @@ void GUI::renderVisualsWindow() noexcept
     ImGui::Checkbox("No sleeves", &config->visuals.noSleeves);
     ImGui::Checkbox("No weapons", &config->visuals.noWeapons);
     ImGui::Checkbox("No smoke", &config->visuals.noSmoke);
+    ImGui::Checkbox("Smoke Circle", &config->visuals.smokeCircle);
     ImGui::SameLine();
     ImGui::Checkbox("Wireframe smoke", &config->visuals.wireframeSmoke);
     ImGui::Checkbox("No molotov", &config->visuals.noMolotov);
@@ -1380,6 +1381,9 @@ void GUI::renderVisualsWindow() noexcept
     ImGui::PushID(0);
     ImGui::SliderInt("", &config->visuals.thirdpersonDistance, 0, 1000, "Thirdperson distance: %d");
     ImGui::PopID();
+    ImGui::PushID("Thirdperson Transparency");
+    ImGui::SliderFloat("", &config->visuals.thirdpersonTransparency, 0.0f, 100.0f, "Scope Transparency: %2.f%");
+    ImGui::PopID();
     ImGui::Checkbox("Freecam", &config->visuals.freeCam);
     ImGui::SameLine();
     ImGui::PushID("Freecam Key");
@@ -1404,9 +1408,12 @@ void GUI::renderVisualsWindow() noexcept
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("skybox files must be put in csgo/materials/skybox/ ");
     }
+    ImGuiCustom::colorPicker("Console color", config->visuals.console);
     ImGuiCustom::colorPicker("World color", config->visuals.world);
     ImGuiCustom::colorPicker("Props color", config->visuals.props);
     ImGuiCustom::colorPicker("Sky color", config->visuals.sky);
+    ImGuiCustom::colorPicker("Molotov Color", config->visuals.molotovColor);
+    ImGuiCustom::colorPicker("Smoke Color", config->visuals.smokeColor);
     ImGui::PushID(13);
     ImGui::SliderInt("", &config->visuals.asusWalls, 0, 100, "Asus walls: %d");
     ImGui::PopID();
